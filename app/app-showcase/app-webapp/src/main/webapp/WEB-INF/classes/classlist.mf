@@ -1,0 +1,13 @@
+org.uberfire.client.screens.TasksGroupViewActivity
+org.uberfire.client.screens.TasksGroupView
+org.uberfire.client.ShowcaseEntryPoint
+org.uberfire.client.navbar.AppNavBar
+org.uberfire.client.resources.AppResource
+org.uberfire.client.perspectives.TasksPerspective
+org.uberfire.client.resources.AppImages
+org.uberfire.backend.server.PicketLinkDefaultUsers
+org.uberfire.client.perspectives.TasksPerspectiveActivity
+org.uberfire.shared.SharedSample
+org.uberfire.client.screens.TasksMainView
+org.uberfire.client.resources.WelcomeCss
+org.uberfire.client.screens.TasksMainViewActivity

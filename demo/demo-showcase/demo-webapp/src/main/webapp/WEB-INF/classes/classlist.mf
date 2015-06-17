@@ -1,0 +1,11 @@
+org.uberfire.client.perspectives.MainPerspectiveActivity
+org.uberfire.client.navbar.AppNavBar
+org.uberfire.client.resources.AppResource
+org.uberfire.client.resources.AppImages
+org.uberfire.client.perspectives.MainPerspective
+org.uberfire.client.screens.HelloWorldScreen
+org.uberfire.client.ShowcaseEntryPoint
+org.uberfire.backend.server.PicketLinkDefaultUsers
+org.uberfire.client.screens.HelloWorldScreenActivity
+org.uberfire.client.resources.WelcomeCss
+org.uberfire.shared.SharedSample
