@@ -41,15 +41,14 @@ public class ShowcaseEntryPoint {
 
     private void setupMenu( @Observes final ApplicationReadyEvent event ) {
         final Menus menus =
-                newTopLevelMenu( "Home" )
+                newTopLevelMenu( "UF Tasks" )
                         .respondsWith( new Command() {
                             @Override
                             public void execute() {
-                                placeManager.goTo( new DefaultPlaceRequest( "MainPerspective" ) );
+                                placeManager.goTo( new DefaultPlaceRequest( "TasksPerspective" ) );
                             }
                         } )
-                        .endMenu()
-                        .build();
+                        .endMenu().build();
 
         menubar.addMenus( menus );
     }

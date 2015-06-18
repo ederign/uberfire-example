@@ -7,17 +7,8 @@
   <ui:with field='res' type='org.uberfire.client.resources.AppResource'/>
 
   <g:FlowPanel>
-    <b:ListGroup>
-      <b:ListGroupItem text="Uberfire Framework">
-        <b:Badge text="12"/>
-      </b:ListGroupItem>
-      <b:ListGroupItem text="Drools Framework">
-        <b:Badge text="1"/>
-      </b:ListGroupItem>
-      <b:ListGroupItem text="Errai Project">
-        <b:Badge text="2"/>
-      </b:ListGroupItem>
-    </b:ListGroup>
-    <b:Button type="PRIMARY" icon="PLUS" text="New Group" />
+    <b:LinkedGroup ui:field="projects"/>
+    <b:Button type="PRIMARY" icon="PLUS" text="New Project" ui:field="newProject"/>
   </g:FlowPanel>
+
 </ui:UiBinder>
