@@ -13,11 +13,8 @@ public class NewProjectPresenter {
     private ProjectsPresenter projectsPresenter;
 
     public interface View extends UberView<NewProjectPresenter> {
-
         void show();
-
         void hide();
-
     }
 
     @Inject
@@ -34,7 +31,7 @@ public class NewProjectPresenter {
     }
 
     public void newProject( String projectName ) {
-        projectsPresenter.newProject( projectName );
+        projectsPresenter.createNewProject( projectName );
         view.hide();
     }
 

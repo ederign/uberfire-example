@@ -31,7 +31,7 @@ public class NewProjectPresenter {
     }
 
     public void newProject( String projectName ) {
-        projectsPresenter.newProject( projectName );
+        projectsPresenter.createNewProject( projectName );
         view.hide();
     }
 

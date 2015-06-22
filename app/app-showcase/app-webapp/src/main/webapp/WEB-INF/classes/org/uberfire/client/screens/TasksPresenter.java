@@ -21,15 +21,11 @@ import org.uberfire.shared.model.Tasks;
 public class TasksPresenter {
 
     public interface View extends UberView<TasksPresenter> {
-
         void activateNewFolder();
-
         void clearTasks();
-
         void newFolder( String name,
                         Integer size,
                         List<String> strings );
-
     }
 
     @Inject
@@ -38,7 +34,7 @@ public class TasksPresenter {
     @Inject
     private NewFolderPresenter newFolderPresenter;
 
-    private String currentProject;
+    private String currentSelectedProject;
 
     private Map<String, Tasks> tasksPerProject = new HashMap<String, Tasks>();
 
@@ -53,8 +49,17 @@ public class TasksPresenter {
     }
 
     public void projectSelected( @Observes ProjectSelectedEvent projectSelectedEvent ) {
-        this.currentProject = projectSelectedEvent.getName();
+        this.currentSelectedProject = projectSelectedEvent.getName();
         selectFolder();
+    }
+
+    private void selectFolder() {
+        view.activateNewFolder();
+        updateView();
+    }
+
+    public void showNewFolder() {
+        newFolderPresenter.show( this );
     }
 
     public void createTask( String folderName,
@@ -87,16 +92,11 @@ public class TasksPresenter {
     }
 
     private Tasks getTasks() {
-        Tasks tasks = tasksPerProject.get( currentProject );
+        Tasks tasks = tasksPerProject.get( currentSelectedProject );
         if ( tasks == null ) {
-            tasks = new Tasks( currentProject );
+            tasks = new Tasks( currentSelectedProject );
         }
         return tasks;
-    }
-
-    private void selectFolder() {
-        view.activateNewFolder();
-        updateView();
     }
 
     private void updateView() {
@@ -110,11 +110,7 @@ public class TasksPresenter {
     public void newFolder( String folderName ) {
         Tasks tasks = getTasks();
         tasks.newFolder( folderName );
-        tasksPerProject.put( currentProject, tasks );
+        tasksPerProject.put( currentSelectedProject, tasks );
         updateView();
-    }
-
-    public void showNewFolder() {
-        newFolderPresenter.show( this );
     }
 }

@@ -31,13 +31,10 @@ public class ProjectsPresenter {
     @Inject
     private PlaceManager placeManager;
 
-    @Inject
-    private NewProjectPresenter newProjectPresenter;
+
 
     @Inject
     private Event<ProjectSelectedEvent> projectSelectedEvent;
-
-    private List<Project> projects = new ArrayList<Project>();
 
     @WorkbenchPartTitle
     public String getTitle() {
@@ -49,20 +46,18 @@ public class ProjectsPresenter {
         return view;
     }
 
+    @Inject
+    private NewProjectPresenter newProjectPresenter;
+
     public void newProject() {
         newProjectPresenter.show( this );
     }
 
-    public void newProject( String projectName ) {
+    private List<Project> projects = new ArrayList<Project>();
+
+    public void createNewProject( String projectName ) {
         projects.add( new Project( projectName ) );
         selectProject( projectName );
-    }
-
-    private void updateView() {
-        view.clearProjects();
-        for ( Project project : projects ) {
-            view.addProject( project.getName(), project.isSelected() );
-        }
     }
 
     public void selectProject( String projectName ) {
@@ -79,5 +74,12 @@ public class ProjectsPresenter {
             }
         }
         updateView();
+    }
+
+    private void updateView() {
+        view.clearProjects();
+        for ( Project project : projects ) {
+            view.addProject( project.getName(), project.isSelected() );
+        }
     }
 }

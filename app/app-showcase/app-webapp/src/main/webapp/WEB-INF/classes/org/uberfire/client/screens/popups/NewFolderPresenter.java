@@ -11,11 +11,8 @@ import org.uberfire.client.screens.TasksPresenter;
 public class NewFolderPresenter {
 
     public interface View extends UberView<NewFolderPresenter> {
-
         void show();
-
         void hide();
-
     }
 
     @Inject

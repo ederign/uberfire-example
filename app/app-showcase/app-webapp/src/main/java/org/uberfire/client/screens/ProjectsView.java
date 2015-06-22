@@ -58,6 +58,12 @@ public class ProjectsView extends Composite implements ProjectsPresenter.View {
     @Override
     public void addProject( final String projectName,
                             final boolean active) {
+        final LinkedGroupItem projectItem = createProjectItems( projectName, active );
+        projects.add( projectItem );
+    }
+
+    private LinkedGroupItem createProjectItems( final String projectName,
+                                                boolean active ) {
         final LinkedGroupItem projectItem = GWT.create( LinkedGroupItem.class );
         projectItem.setText( projectName );
         projectItem.setActive( active );
@@ -67,7 +73,7 @@ public class ProjectsView extends Composite implements ProjectsPresenter.View {
                 presenter.selectProject( projectName );
             }
         } );
-        projects.add( projectItem );
+        return projectItem;
     }
 
 }

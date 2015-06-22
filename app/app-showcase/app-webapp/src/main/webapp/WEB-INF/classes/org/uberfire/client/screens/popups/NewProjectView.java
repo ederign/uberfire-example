@@ -24,8 +24,6 @@ public class NewProjectView extends Composite
 
     private static Binder uiBinder = GWT.create( Binder.class );
 
-    private NewProjectPresenter presenter;
-
     @UiField
     Modal popup;
 
@@ -37,6 +35,8 @@ public class NewProjectView extends Composite
 
     @UiField
     Button cancel;
+
+    private NewProjectPresenter presenter;
 
 
     @Override

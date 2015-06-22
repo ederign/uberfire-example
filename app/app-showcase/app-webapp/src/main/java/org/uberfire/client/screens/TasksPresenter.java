@@ -1,5 +1,6 @@
 package org.uberfire.client.screens;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,15 +15,17 @@ import org.uberfire.client.mvp.UberView;
 import org.uberfire.client.screens.popups.NewFolderPresenter;
 import org.uberfire.shared.events.ProjectSelectedEvent;
 import org.uberfire.shared.model.Folder;
-import org.uberfire.shared.model.Tasks;
 
 @ApplicationScoped
 @WorkbenchScreen(identifier = "TasksPresenter")
 public class TasksPresenter {
 
     public interface View extends UberView<TasksPresenter> {
+
         void activateNewFolder();
+
         void clearTasks();
+
         void newFolder( String name,
                         Integer size,
                         List<String> strings );
@@ -36,7 +39,7 @@ public class TasksPresenter {
 
     private String currentSelectedProject;
 
-    private Map<String, Tasks> tasksPerProject = new HashMap<String, Tasks>();
+    private Map<String, List<Folder>> foldersPerProject = new HashMap<String, List<Folder>>();
 
     @WorkbenchPartTitle
     public String getTitle() {
@@ -53,6 +56,15 @@ public class TasksPresenter {
         selectFolder();
     }
 
+    private void selectFolder() {
+        view.activateNewFolder();
+        updateView();
+    }
+
+    public void showNewFolder() {
+        newFolderPresenter.show( this );
+    }
+
     public void createTask( String folderName,
                             String task ) {
 
@@ -64,8 +76,7 @@ public class TasksPresenter {
     }
 
     private Folder getFolder( String folderName ) {
-        Tasks tasks = getTasks();
-        for ( final Folder folder : tasks.getFolders() ) {
+        for ( final Folder folder : getFolders() ) {
             if ( folder.getName().equalsIgnoreCase( folderName ) ) {
                 return folder;
             }
@@ -82,35 +93,25 @@ public class TasksPresenter {
         updateView();
     }
 
-    private Tasks getTasks() {
-        Tasks tasks = tasksPerProject.get( currentSelectedProject );
-        if ( tasks == null ) {
-            tasks = new Tasks( currentSelectedProject );
+    private List<Folder> getFolders() {
+        List<Folder> folders = foldersPerProject.get( currentSelectedProject );
+        if ( folders == null ) {
+            folders = new ArrayList<Folder>();
         }
-        return tasks;
-    }
-
-    private void selectFolder() {
-        view.activateNewFolder();
-        updateView();
+        return folders;
     }
 
     private void updateView() {
         view.clearTasks();
-        Tasks tasks = getTasks();
-        for ( final Folder folder : tasks.getFolders() ) {
+        for ( final Folder folder : getFolders() ) {
             view.newFolder( folder.getName(), folder.getTasks().size(), folder.getTasks() );
         }
     }
 
     public void newFolder( String folderName ) {
-        Tasks tasks = getTasks();
-        tasks.newFolder( folderName );
-        tasksPerProject.put( currentSelectedProject, tasks );
+        List<Folder> folders = getFolders();
+        folders.add( new Folder( folderName ) );
+        foldersPerProject.put( currentSelectedProject, folders );
         updateView();
-    }
-
-    public void showNewFolder() {
-        newFolderPresenter.show( this );
     }
 }

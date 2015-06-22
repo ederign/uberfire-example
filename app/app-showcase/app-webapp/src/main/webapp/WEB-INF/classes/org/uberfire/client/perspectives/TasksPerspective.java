@@ -24,11 +24,11 @@ public class TasksPerspective {
         perspective.setName( "TasksPerspective" );
 
         final PanelDefinition west = new PanelDefinitionImpl( SimpleWorkbenchPanelPresenter.class.getName() );
-        west.addPart( new PartDefinitionImpl( new DefaultPlaceRequest( "TasksGroupView" ) ) );
+        west.addPart( new PartDefinitionImpl( new DefaultPlaceRequest( "ProjectsPresenter" ) ) );
         west.setWidth( 350 );
         perspective.getRoot().insertChild( CompassPosition.WEST, west );
 
-        perspective.getRoot().addPart( new PartDefinitionImpl( new DefaultPlaceRequest( "TasksMainView" ) ));
+        perspective.getRoot().addPart( new PartDefinitionImpl( new DefaultPlaceRequest( "TasksPresenter" ) ));
 
         return perspective;
     }

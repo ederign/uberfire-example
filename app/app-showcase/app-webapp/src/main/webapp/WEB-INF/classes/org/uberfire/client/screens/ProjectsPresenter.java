@@ -20,12 +20,9 @@ import org.uberfire.shared.model.Project;
 public class ProjectsPresenter {
 
     public interface View extends UberView<ProjectsPresenter> {
-
         void clearProjects();
-
         void addProject( String projectName,
                          boolean selected );
-
     }
 
     @Inject
@@ -34,13 +31,10 @@ public class ProjectsPresenter {
     @Inject
     private PlaceManager placeManager;
 
-    @Inject
-    private NewProjectPresenter newProjectPresenter;
+
 
     @Inject
     private Event<ProjectSelectedEvent> projectSelectedEvent;
-
-    private List<Project> projects = new ArrayList<Project>();
 
     @WorkbenchPartTitle
     public String getTitle() {
@@ -52,25 +46,22 @@ public class ProjectsPresenter {
         return view;
     }
 
+    @Inject
+    private NewProjectPresenter newProjectPresenter;
+
     public void newProject() {
         newProjectPresenter.show( this );
     }
 
-    public void newProject( String projectName ) {
+    private List<Project> projects = new ArrayList<Project>();
+
+    public void createNewProject( String projectName ) {
         projects.add( new Project( projectName ) );
         selectProject( projectName );
     }
 
-    private void updateView() {
-        view.clearProjects();
-        for ( Project project : projects ) {
-            view.addProject( project.getName(), project.isSelected() );
-        }
-    }
-
     public void selectProject( String projectName ) {
         setActiveProject( projectName );
-        updateView();
         projectSelectedEvent.fire( new ProjectSelectedEvent( projectName ) );
     }
 
@@ -81,6 +72,14 @@ public class ProjectsPresenter {
             } else {
                 project.setSelected( false );
             }
+        }
+        updateView();
+    }
+
+    private void updateView() {
+        view.clearProjects();
+        for ( Project project : projects ) {
+            view.addProject( project.getName(), project.isSelected() );
         }
     }
 }

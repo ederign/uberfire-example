@@ -6,10 +6,14 @@
 
 
   <ui:with field='res' type='org.uberfire.client.resources.AppResource'/>
-
+  <ui:style>
+    .button {
+      margin-top: 5px;
+      margin-left: 5px;
+    }
+  </ui:style>
   <g:FlowPanel>
-
     <g:FlowPanel ui:field="tasks"/>
-    <b:Button type="PRIMARY" icon="PLUS" text="New Folder" ui:field="newFolder"/>
+    <b:Button styleName="{style.button}" type="PRIMARY" icon="PLUS" text="New Folder" ui:field="newFolder"/>
   </g:FlowPanel>
 </ui:UiBinder>

@@ -19,12 +19,9 @@ public class NewFolderView extends Composite
     interface Binder
             extends
             UiBinder<Widget, NewFolderView> {
-
     }
 
     private static Binder uiBinder = GWT.create( Binder.class );
-
-    private NewFolderPresenter presenter;
 
     @UiField
     Modal popup;
@@ -38,6 +35,7 @@ public class NewFolderView extends Composite
     @UiField
     Button cancel;
 
+    private NewFolderPresenter presenter;
 
     @Override
     public void init( NewFolderPresenter presenter ) {

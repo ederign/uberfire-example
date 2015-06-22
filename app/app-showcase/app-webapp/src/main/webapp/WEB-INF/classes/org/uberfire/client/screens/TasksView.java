@@ -27,14 +27,13 @@ import org.gwtbootstrap3.client.ui.constants.ListGroupItemType;
 @Dependent
 public class TasksView extends Composite implements TasksPresenter.View {
 
-    private TasksPresenter presenter;
-
     @UiField
     Button newFolder;
 
     @UiField
     FlowPanel tasks;
-    private String folderName;
+
+    private TasksPresenter presenter;
 
     interface Binder
             extends
