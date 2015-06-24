@@ -48,7 +48,16 @@ public class ShowcaseEntryPoint {
                                 placeManager.goTo( new DefaultPlaceRequest( "TasksPerspective" ) );
                             }
                         } )
-                        .endMenu().build();
+                        .endMenu().
+        newTopLevelMenu( "Dashboard" )
+                .respondsWith( new Command() {
+                    @Override
+                    public void execute() {
+                        placeManager.goTo( new DefaultPlaceRequest( "DashboardPerspective" ) );
+                    }
+                } )
+                .endMenu()
+                        .build();
 
         menubar.addMenus( menus );
     }
